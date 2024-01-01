@@ -1,48 +1,27 @@
 #include "monty.h"
 
 /**
- * main - the start point of the monty interperter
- *
- * @argc: arguments count
- * @argv: arguments list
- *
- * Return: 0 on success 1 on fail
- *
+ * main - Entry point
+ * @argc: number of arguments
+ * @argv: array of arguments
+ * Return: 0 on success
  */
-
 
 int main(int argc, char *argv[])
 {
-	int fileDiscriptor;
+	FILE *filePointer;
 	const char *fileName;
-	char *commands[1024];
-	ssize_t numberOfChars;
+	char commands[1024];
 
 	if (argc < 2 || argc > 2)
 	{
 		perror("USAGE: monty file");
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
 	fileName = argv[1];
-
-	if (fileName == NULL)
-	{
-                perror("USAGE: monty file");
-                exit (EXIT_FAILURE);
-	}
-	fileDiscriptor = open(fileName, O_RDONLY);
-	if (fileDiscriptor == -1)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", fileName);
-		exit (EXIT_FAILURE);
-	}
-
-	numberOfChars = read(fileDiscriptor, commands, 1024);
-	if (numberOfChars == -1)
-	{
-		fprintf(stderr, "Error: Can't read file %s\n", fileName);
-                exit (EXIT_FAILURE);
-	}
+	filePointer = open_file_if_exist(fileName);
+	read_commands_from_file(commands, filePointer);
+	fclose(filePointer);
 	return (0);
 }
