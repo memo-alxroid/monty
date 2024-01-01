@@ -13,8 +13,10 @@ void pushOP(stack_t **stack, unsigned int line_number)
 {
 	stack_t *currentElement = (*stack);
 	stack_t *newElement = NULL;
+	char *number = NULL;
 
-	if (line_number == 0)
+	number = strtok(NULL, " \n\t\r");
+	if (line_number == 0 || number == NULL)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
@@ -26,8 +28,7 @@ void pushOP(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-
-	newElement->n = line_number;
+	newElement->n = atoi(number);
 
 	if (currentElement == NULL)
 	{

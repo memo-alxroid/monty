@@ -3,35 +3,39 @@
 /**
  * read_commands_from_file - read commands from file
  *
- * @commands: commands line
  * @filePointer: file pointer
  *
  * Return: 0 on success
  *
  */
 
-int read_commands_from_file(char *commands, FILE *filePointer)
+void read_commands_from_file(FILE *filePointer)
 {
 	int lineNumber = 1;
 	char *command = NULL;
+	char *line = NULL;
+	size_t len = 0;
 	stack_t *stack = NULL;
 
-	while (fgets(commands, 1024, filePointer) != NULL)
+	while (getline(&line, &len, filePointer) != -1)
 	{
-		command = strtok(commands, " \n$");
-		while (command != NULL)
+		command = strtok(line, " \n\t\r");
+		if (command != NULL)
 		{
-			execute_command_if_exist(&command, &stack, lineNumber);
-			command = strtok(NULL, " \n$");
+			execute_command_if_exist(command, &stack, lineNumber);
 		}
 		lineNumber++;
 	}
 	if (!feof(filePointer))
 	{
 		fclose(filePointer);
+		free(stack);
+		free(line);
 		printf("Error while reading from file\n");
 		exit(EXIT_FAILURE);
 	}
+	if (line != NULL)
+		free(line);
 	fclose(filePointer);
-	return (0);
+	free(stack);
 }

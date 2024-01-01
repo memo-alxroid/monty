@@ -8,20 +8,30 @@
  * Return: void
  */
 
-void execute_command_if_exist(char **cmd, stack_t **stack, unsigned int lineNum)
+void execute_command_if_exist(char *cmd, stack_t **stack, unsigned int lineNum)
 {
-	void (*f)(stack_t **stack, unsigned int line_number);
+	int i;
+	instruction_t ops[] = {
+		{"push", pushOP},
+		{"pall", pallOP},
+		{"pint", pintOP},
+		{"pop", popOP},
+		{"swap", swapOP},
+		{"add", addOP},
+		{"nop", nopOP},
+		{NULL, NULL}
+	};
 
-	if (get_op_function(*cmd) == NULL)
+	for (i = 0; ops[i].opcode; i++)
+		if (strcmp(cmd, ops[i].opcode) == 0)
+		{
+			ops[i].f(stack, lineNum);
+			return;
+		}
+
+	if (strlen(cmd) != 0 && cmd[0] != '#')
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", lineNum, cmd);
+		printf("L%u: unknown instruction %s\n", lineNum, cmd);
 		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		f = get_op_function(*cmd);
-		*cmd = strtok(NULL, " ");
-		lineNum = atoi(*cmd);
-		f(stack, lineNum);
 	}
 }
