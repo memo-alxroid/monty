@@ -19,7 +19,11 @@ int read_commands_from_file(char *commands, FILE *filePointer)
 	while (fgets(commands, 1024, filePointer) != NULL)
 	{
 		command = strtok(commands, " \n$");
-		execute_command_if_exist(&command, &stack, lineNumber);
+		while (command != NULL)
+		{
+			execute_command_if_exist(&command, &stack, lineNumber);
+			command = strtok(NULL, " \n$");
+		}
 		lineNumber++;
 	}
 	if (!feof(filePointer))
