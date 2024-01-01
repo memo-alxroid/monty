@@ -3,7 +3,7 @@
 /**
  * open_file_if_exist - open file if exist
  *
- * @filename: file name
+ * @fileName: file name
  *
  * Return: file pointer or NULL
  */

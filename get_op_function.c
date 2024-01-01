@@ -6,7 +6,7 @@
  * Return: function to opcode
  */
 
-void (*get_op_function(char *opcode))(stack_t **stack, unsigned int line_number)
+void (*get_op_function(char *opcode))(stack_t **stack, unsigned int lineNumber)
 {
 	instruction_t opcodes[] = {
 		{"push", pushOP},

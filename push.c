@@ -1,5 +1,14 @@
 #include "monty.h"
 
+/**
+ * pushOP - push element to stack
+ *
+ * @stack: stack
+ * @line_number: line number
+ *
+ * Return: void
+ */
+
 void pushOP(stack_t **stack, unsigned int line_number)
 {
 	stack_t *currentElement = (*stack);

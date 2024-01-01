@@ -2,26 +2,26 @@
 
 /**
  * execute_command_if_exist - execute command if exist
- * @command: command to execute
+ * @cmd: command to execute
  * @stack: stack that is a queue or stack
- * @lineNumber: line number
+ * @lineNum: line number
  * Return: void
  */
 
-void execute_command_if_exist(char *command, stack_t **stack, unsigned int lineNumber)
+void execute_command_if_exist(char *cmd, stack_t **stack, unsigned int lineNum)
 {
 	void (*f)(stack_t **stack, unsigned int line_number);
 
-	if (get_op_function(command) == NULL)
+	if (get_op_function(cmd) == NULL)
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", lineNumber, command);
+		fprintf(stderr, "L%d: unknown instruction %s\n", lineNum, cmd);
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		f = get_op_function(command);
-		command = strtok(NULL, " ");
-		lineNumber = atoi(command);
-		f(stack, lineNumber);
+		f = get_op_function(cmd);
+		cmd = strtok(NULL, " ");
+		lineNum = atoi(cmd);
+		f(stack, lineNum);
 	}
 }
