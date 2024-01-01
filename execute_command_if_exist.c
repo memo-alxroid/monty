@@ -1,27 +1,37 @@
 #include "monty.h"
 
 /**
- * execute_command_if_exist - execute command if exist
- * @cmd: command to execute
- * @stack: stack that is a queue or stack
- * @lineNum: line number
- * Return: void
+ * read_commands_from_file - read commands from file
+ *
+ * @commands: commands line
+ * @filePointer: file pointer
+ *
+ * Return: 0 on success
+ *
  */
 
-void execute_command_if_exist(char **cmd, stack_t **stack, unsigned int lineNum)
+int read_commands_from_file(char *commands, FILE *filePointer)
 {
-	void (*f)(stack_t **stack, unsigned int line_number);
+	int lineNumber = 1;
+	char *command = NULL;
+	stack_t *stack = NULL;
 
-	if (get_op_function(*cmd) == NULL)
+	while (fgets(commands, 1024, filePointer) != NULL)
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", lineNum, cmd);
+		command = strtok(commands, " \n$");
+		while (command != NULL)
+		{
+			execute_command_if_exist(&command, &stack, lineNumber);
+			command = strtok(NULL, " \n$");
+		}
+		lineNumber++;
+	}
+	if (!feof(filePointer))
+	{
+		fclose(filePointer);
+		printf("Error while reading from file\n");
 		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		f = get_op_function(*cmd);
-		*cmd = strtok(NULL, " ");
-		lineNum = atoi(*cmd);
-		f(stack, lineNum);
-	}
+	fclose(filePointer);
+	return (0);
 }
