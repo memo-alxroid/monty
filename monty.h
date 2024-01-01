@@ -42,9 +42,9 @@ typedef struct instruction_s
 } instruction_t;
 
 FILE *open_file_if_exist(const char *fileName);
-void read_commands_from_file(char *commands, FILE *filePointer);
+int read_commands_from_file(char *commands, FILE *filePointer);
 void (*get_op_function(char *opcode))(stack_t **stack, unsigned int line_number);
-void execute_command_if_exist(char *command, stack_t **stack, unsigned int lineNumber);
+void execute_command_if_exist(char **command, stack_t **stack, unsigned int lineNumber);
 void pushOP(stack_t **stack, unsigned int line_number);
 void pallOP(stack_t **stack, unsigned int line_number);
 void pintOP(stack_t **stack, unsigned int line_number);

@@ -10,7 +10,7 @@
  *
  */
 
-void read_commands_from_file(char *commands, FILE *filePointer)
+int read_commands_from_file(char *commands, FILE *filePointer)
 {
 	int lineNumber = 1;
 	char *command = NULL;
@@ -19,11 +19,15 @@ void read_commands_from_file(char *commands, FILE *filePointer)
 	while (fgets(commands, 1024, filePointer) != NULL)
 	{
 		command = strtok(commands, " \n$");
-		while (command != NULL)
-		{
-			execute_command_if_exist(command, &stack, lineNumber);
-			command = strtok(NULL, " ");
-		}
+		execute_command_if_exist(&command, &stack, lineNumber);
 		lineNumber++;
 	}
+	if (!feof(filePointer))
+	{
+		fclose(filePointer);
+		printf("Error while reading from file\n");
+		exit(EXIT_FAILURE);
+	}
+	fclose(filePointer);
+	return (0);
 }

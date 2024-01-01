@@ -21,7 +21,6 @@ int main(int argc, char *argv[])
 
 	fileName = argv[1];
 	filePointer = open_file_if_exist(fileName);
-	read_commands_from_file(commands, filePointer);
-	fclose(filePointer);
-	return (0);
+
+	return (read_commands_from_file(commands, filePointer));
 }
