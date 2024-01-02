@@ -9,20 +9,19 @@
  *
  */
 
-void read_commands_from_file(FILE *filePointer)
+void read_commands_from_file(FILE *filePointer, stack_t **stack)
 {
 	int lineNumber = 1;
 	char *command = NULL;
 	char *line = NULL;
 	size_t len = 0;
-	stack_t *stack = NULL;
-
+	
 	while (getline(&line, &len, filePointer) != -1)
 	{
 		command = strtok(line, " \n\t\r$");
 		if (command != NULL)
 		{
-			execute_command_if_exist(command, &stack, lineNumber);
+			execute_command_if_exist(command, stack, lineNumber);
 		}
 		lineNumber++;
 	}
