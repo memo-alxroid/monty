@@ -19,7 +19,7 @@ void read_commands_from_file(FILE *filePointer)
 
 	while (getline(&line, &len, filePointer) != -1)
 	{
-		command = strtok(line, " \n\t\r");
+		command = strtok(line, " \n\t\r$");
 		if (command != NULL)
 		{
 			execute_command_if_exist(command, &stack, lineNumber);
