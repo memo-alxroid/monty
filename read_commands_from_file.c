@@ -12,7 +12,7 @@
 void read_commands_from_file(FILE *filePointer, stack_t **stack)
 {
 	int lineNumber = 1;
-	char *command = NULL;
+	char *command;
 	char *line = NULL;
 	size_t len = 0;
 	
