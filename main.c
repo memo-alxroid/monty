@@ -1,5 +1,7 @@
 #include "monty.h"
 
+stack_t **global_head;
+
 /**
  * main - Entry point
  * @argc: number of arguments
