@@ -19,6 +19,6 @@ void popOP(stack_t **stack, unsigned int line_number)
 	else
 	{
 		(*stack) = currentElement->next;
-		free(currentElement);
+		free_stack(currentElement);
 	}
 }
