@@ -13,13 +13,17 @@ int main(int argc, char *argv[])
 {
 	FILE *filePointer;
 	const char *fileName;
+	stack_t *head = NULL;
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
+	
+	head = NULL;
+	global_head = &head;
+	
 	fileName = argv[1];
 	filePointer = open_file_if_exist(fileName);
 	read_commands_from_file(filePointer);
