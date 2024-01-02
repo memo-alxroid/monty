@@ -32,7 +32,7 @@ void execute_command_if_exist(char *cmd, stack_t **stack, unsigned int lineNum)
 	}
 	if (cmd && ops[i].opcode == NULL)
 	{
-		printf("L%u: unknown instruction %s\n", lineNum, cmd);
+		fprintf(stderr, "L%u: unknown instruction %s\n", lineNum, cmd);
 		exit(EXIT_FAILURE);
 	}
 }
