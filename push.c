@@ -13,7 +13,7 @@ void pushOP(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newElement;
 	char *number;
-	int i;
+	size_t i;
 
 	number = strtok(NULL, " \n\t\r");
 	if (line_number == 0 || number == NULL)
