@@ -26,14 +26,6 @@ void read_commands_from_file(FILE *filePointer)
 		}
 		lineNumber++;
 	}
-	if (!feof(filePointer))
-	{
-		fclose(filePointer);
-		free(stack);
-		free(line);
-		printf("Error while reading from file\n");
-		exit(EXIT_FAILURE);
-	}
 	if (line != NULL)
 		free(line);
 	fclose(filePointer);
