@@ -23,7 +23,7 @@ void pushOP(stack_t **stack, unsigned int line_number)
 	}
 	for (i = 0; i < strlen(number); i++)
 	{
-		if (!isdigit(number[i]))
+		if (!isdigit(number[i]) && number[i] != '-')
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
