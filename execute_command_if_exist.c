@@ -23,13 +23,14 @@ void execute_command_if_exist(char *cmd, stack_t **stack, unsigned int lineNum)
 	};
 
 	for (i = 0; ops[i].opcode; i++)
+	{
 		if (strcmp(cmd, ops[i].opcode) == 0)
 		{
 			ops[i].f(stack, lineNum);
 			return;
 		}
-
-	if (strlen(cmd) != 0 && cmd[0] != '#')
+	}
+	if (cmd && ops[i].opcode == NULL)
 	{
 		printf("L%u: unknown instruction %s\n", lineNum, cmd);
 		exit(EXIT_FAILURE);
