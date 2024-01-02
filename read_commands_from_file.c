@@ -4,7 +4,7 @@
  * read_commands_from_file - read commands from file
  *
  * @filePointer: file pointer
- *
+ * @stack: the stack
  * Return: 0 on success
  *
  */
