@@ -12,8 +12,8 @@
 void pushOP(stack_t **stack, unsigned int line_number)
 {
 	stack_t *currentElement = (*stack);
-	stack_t *newElement = NULL;
-	char *number = NULL;
+	stack_t *newElement;
+	char *number;
 
 	number = strtok(NULL, " \n\t\r");
 	if (line_number == 0 || number == NULL)
