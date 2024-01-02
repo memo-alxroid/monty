@@ -13,6 +13,11 @@ void pallOP(stack_t **stack, unsigned int line_number)
 {
 	stack_t *currentElement = (*stack);
 
+	if (currentElement == NULL)
+	{
+		return;
+
+	}
 	while (currentElement != NULL)
 	{
 		printf("%d\n", currentElement->n);

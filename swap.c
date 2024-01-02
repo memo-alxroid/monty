@@ -13,7 +13,6 @@ void swapOP(stack_t **stack, unsigned int line_number)
 {
 	stack_t *firstElement = (*stack), *secondElement = NULL;
 
-
 	if (firstElement == NULL || firstElement->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
