@@ -9,16 +9,17 @@
 
 void popOP(stack_t **stack, unsigned int line_number)
 {
-	stack_t *currentElement = (*stack);
+	stack_t *currentElement;
 
-	if (currentElement == NULL)
+	if ((*stack) == NULL || stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		(*stack) = (*stack)->next;
-		free_stack(currentElement);
+		currentElement = *stack;
+		*stack = (*stack)->next;
+		free(currentElement);
 	}
 }
