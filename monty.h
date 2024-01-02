@@ -41,6 +41,8 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+extern stack_t **global_head;
+
 FILE *open_file_if_exist(const char *fileName);
 void read_commands_from_file(FILE *filePointer);
 void execute_command_if_exist(char *command, stack_t **stack, unsigned int lineNumber);
