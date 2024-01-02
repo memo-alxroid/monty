@@ -13,6 +13,7 @@ void pushOP(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newElement;
 	char *number;
+	int i;
 
 	number = strtok(NULL, " \n\t\r");
 	if (line_number == 0 || number == NULL)
@@ -20,7 +21,14 @@ void pushOP(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
+	for (i = 0; i < strlen(number); i++)
+	{
+		if (!isdigit(number[i]))
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+	}
 	newElement = malloc(sizeof(stack_t));
 	if (newElement == NULL)
 	{
