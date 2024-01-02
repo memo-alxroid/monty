@@ -53,5 +53,6 @@ void popOP(stack_t **stack, unsigned int line_number);
 void swapOP(stack_t **stack, unsigned int line_number);
 void addOP(stack_t **stack, unsigned int line_number);
 void nopOP(stack_t **stack, unsigned int line_number);
+void global_free(void);
 
 #endif
