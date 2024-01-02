@@ -11,7 +11,6 @@
 
 void pushOP(stack_t **stack, unsigned int line_number)
 {
-	stack_t *currentElement = (*stack);
 	stack_t *newElement;
 	char *number;
 
@@ -29,18 +28,11 @@ void pushOP(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	newElement->n = atoi(number);
+	newElement->prev = NULL;
+	newElement->next = *stack;
 
-	if (currentElement == NULL)
-	{
-		newElement->prev = NULL;
-		newElement->next = NULL;
-		(*stack) = newElement;
-	}
-	else
-	{
-		newElement->prev = NULL;
-		newElement->next = currentElement;
-		currentElement->prev = newElement;
-		(*stack) = newElement;
-	}
+	if (*stack != NULL)
+		(*stack)->prev = newElement;
+
+	*stack = newElement;
 }
