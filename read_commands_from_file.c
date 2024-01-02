@@ -18,7 +18,7 @@ void read_commands_from_file(FILE *filePointer, stack_t **stack)
 
 	while (getline(&line, &len, filePointer) != -1)
 	{
-		command = strtok(line, " \n\t\r");
+		command = strtok(line, " \n\t\r$");
 		if (command != NULL)
 		{
 			execute_command_if_exist(command, stack, lineNumber);
@@ -28,5 +28,4 @@ void read_commands_from_file(FILE *filePointer, stack_t **stack)
 	if (line != NULL)
 		free(line);
 	fclose(filePointer);
-	free(stack);
 }
