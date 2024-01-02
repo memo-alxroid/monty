@@ -37,5 +37,4 @@ void read_commands_from_file(FILE *filePointer)
 	if (line != NULL)
 		free(line);
 	fclose(filePointer);
-	free(stack);
 }
